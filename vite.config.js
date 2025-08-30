@@ -10,6 +10,7 @@ export default defineConfig({
     vue(),
     vueDevTools(),
   ],
+  base: '/2025-vue3-TodolistAPI-final/',
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
