@@ -45,7 +45,6 @@ const addTodo = (content) => {
 }
 
 const removeTodo = (id) => {
-  console.log(id)
   todos.value = todos.value.filter((t) => t.id !== id)
   // todos.value = todos.value.filter((t) => {
   //   return t.id !== id  // 有沒有加 return 很有差!!

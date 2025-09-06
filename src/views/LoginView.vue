@@ -26,8 +26,9 @@
             name="email"
             placeholder="請輸入 email"
             required
+            v-model="email"
           />
-          <span>此欄位不可留空</span>
+          <span v-if="email.trim() === ''">此欄位不可留空</span>
           <label class="formControls_label" for="pwd">密碼</label>
           <input
             class="formControls_input"
@@ -36,14 +37,10 @@
             id="pwd"
             placeholder="請輸入密碼"
             required
+            v-model="password"
           />
-          <input
-            class="formControls_btnSubmit"
-            type="button"
-            @click="router.push('/todolist')"
-            value="登入"
-          />
-          <router-link to="/register" class="formControls_btnLink">註冊帳號</router-link>
+          <input class="formControls_btnSubmit" type="button" @click="handleLogin" value="登入" />
+          <RouterLink to="/register" class="formControls_btnLink">註冊帳號</RouterLink>
         </form>
       </div>
     </div>
@@ -51,12 +48,34 @@
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router'
-
-function handleClick() {
-  console.log('handleClick')
-}
+import { login } from '@/utils/api'
+import { ref } from 'vue'
+import { RouterLink, useRouter } from 'vue-router'
 const router = useRouter()
+
+// 表單資料
+const email = ref('rumi@gamil.com')
+const password = ref('')
+
+// 處理登入
+const handleLogin = async () => {
+  // TODO 驗證表單 ( 請輸入有效的 Email 格式 / 不可空 )
+
+  try {
+    // call login api
+    const res = await login(email.value, password.value)
+    const { token, exp } = res.data
+
+    // 儲存 token
+    document.cookie = `vue3-todolist-token=${token}; expires=${exp}`
+    alert('登入成功')
+
+    // 跳轉 todoist page
+    router.push('/todolist')
+  } catch (error) {
+    alert(`發生錯誤: ${error.response.data.message}`)
+  }
+}
 </script>
 
 <style></style>

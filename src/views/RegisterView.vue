@@ -95,7 +95,6 @@ const handleRegister = async () => {
     router.push('/login')
   } catch (error) {
     alert(error.response.data.message)
-    console.log(error)
   }
 }
 </script>
