@@ -1,8 +1,9 @@
 <template>
   <li>
     <label class="todoList_label">
-      <input class="todoList_input" type="checkbox" value="true" />
-      <span>把冰箱發霉的檸檬拿去丟</span>
+      <!--  :checked="todo.status"不能雙向榜定，要用 v-model -->
+      <input class="todoList_input" type="checkbox" value="true" v-model="todo.status" />
+      <span>{{ todo.content }}</span>
     </label>
     <a href="#">
       <i class="fa fa-times"></i>
@@ -10,6 +11,13 @@
   </li>
 </template>
 
-<script setup></script>
+<script setup>
+const props = defineProps({
+  todo: {
+    type: Object,
+    required: true,
+  },
+})
+</script>
 
 <style lang="scss" scoped></style>

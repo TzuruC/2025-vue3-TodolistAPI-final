@@ -17,8 +17,8 @@
         <!-- 新增待辦表單 TodoForm.vue -->
         <TodoForm />
         <!-- 檢視代辦項目 TodoList.vue -->
-        <TodoList v-if="todos.length !== 0" />
-        <p v-else>沒有代辦事項。</p>
+        <TodoList v-if="todos.length !== 0" :todos="todos" />
+        <p v-else>目前尚無待辦事項。</p>
       </div>
     </div>
   </div>
