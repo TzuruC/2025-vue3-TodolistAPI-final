@@ -6,7 +6,10 @@
         <li class="todo_sm">
           <a href="#"><span>王小明的代辦</span></a>
         </li>
-        <li><a href="#loginPage">登出</a></li>
+        <li>
+          <!-- <a href="#loginPage">登出</a> -->
+          <router-link to="/" class="formControls_btnLink">登出</router-link>
+        </li>
       </ul>
     </nav>
     <div class="conatiner todoListPage vhContainer">

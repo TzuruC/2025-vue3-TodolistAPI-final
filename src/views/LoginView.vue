@@ -40,9 +40,10 @@
           <input
             class="formControls_btnSubmit"
             type="button"
-            onclick="javascript:location.href='#todoListPage'"
+            @click="router.push('/todo')"
             value="登入"
           />
+          <!-- <router-link to="/todo" class="formControls_btnSubmit">登入</router-link> -->
           <!-- <a class="formControls_btnLink" href="#signup">註冊帳號</a> -->
           <router-link to="/signup" class="formControls_btnLink">註冊帳號</router-link>
         </form>
@@ -52,9 +53,12 @@
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router'
+
 function handleClick() {
   console.log('handleClick')
 }
+const router = useRouter()
 </script>
 
 <style></style>
