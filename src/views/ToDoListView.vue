@@ -8,7 +8,7 @@
         </li>
         <li>
           <!-- <a href="#loginPage">登出</a> -->
-          <router-link to="/" class="formControls_btnLink">登出</router-link>
+          <router-link to="/login" class="formControls_btnLink">登出</router-link>
         </li>
       </ul>
     </nav>

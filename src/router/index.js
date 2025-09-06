@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import LoginView from '../views/LoginView.vue'
-import registerView from '../views/registerView.vue'
+import RegisterView from 'src/views/RegisterView.vue'
 import TodoListView from '../views/TodoListView.vue'
 
 const router = createRouter({
@@ -20,7 +20,7 @@ const router = createRouter({
     {
       path: '/register',
       name: 'register',
-      component: registerView,
+      component: RegisterView,
     },
     {
       path: '/:pathMatch(.*)*', // catch-all route，將所有不存在的路由導回首頁
