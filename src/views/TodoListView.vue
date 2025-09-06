@@ -49,10 +49,7 @@ const addTodo = async (content) => {
       todos.value.push(newTodo)
     }
     const res = await postTodoData(content)
-    console.log(res)
-  } catch (error) {
-    console.log(error)
-  }
+  } catch (error) {}
 }
 const removeTodo = async (id) => {
   try {
@@ -60,10 +57,7 @@ const removeTodo = async (id) => {
     if (todos.value.length !== 0) {
       todos.value = todos.value.filter((t) => t.id !== id)
     }
-    console.log(res)
-  } catch (error) {
-    console.log(error)
-  }
+  } catch (error) {}
   // todos.value = todos.value.filter((t) => {
   //   return t.id !== id  // 有沒有加 return 很有差!!
   // })
@@ -76,9 +70,7 @@ const handleLogout = async () => {
     document.cookie = 'vue3-todolist-token=;'
     alert('您已登出。')
     router.push('/login')
-  } catch (error) {
-    // console.log(error)
-  }
+  } catch (error) {}
 }
 
 // 一進來頁面就驗證身份
