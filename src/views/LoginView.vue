@@ -54,7 +54,7 @@ import { RouterLink, useRouter } from 'vue-router'
 const router = useRouter()
 
 // 表單資料
-const email = ref('rumi@gamil.com')
+const email = ref('')
 const password = ref('')
 
 // 處理登入

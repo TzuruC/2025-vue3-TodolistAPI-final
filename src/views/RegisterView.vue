@@ -78,8 +78,8 @@ import { RouterLink, useRouter } from 'vue-router'
 const router = useRouter()
 
 // 表單資料
-const email = ref('rumi@gamil.com')
-const nickname = ref('rumi')
+const email = ref('')
+const nickname = ref('')
 const password = ref('')
 const confirmPassword = ref('')
 

@@ -35,10 +35,7 @@ const handleRemoveTodo = (id) => {
 const patchTodoList = async (id) => {
   try {
     const res = await patchTodoData(id)
-    console.log(res)
-  } catch (error) {
-    console.log(error)
-  }
+  } catch (error) {}
 }
 </script>
 
