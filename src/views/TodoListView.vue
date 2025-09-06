@@ -4,11 +4,13 @@
       <h1><a href="#">ONLINE TODO LIST</a></h1>
       <ul>
         <li class="todo_sm">
-          <a href="#"><span>王小明的代辦</span></a>
+          <a href="#"
+            ><span>{{ getUserNickname }} 的代辦</span></a
+          >
         </li>
         <li>
-          <!-- <a href="#loginPage">登出</a> -->
-          <router-link to="/login" class="formControls_btnLink">登出</router-link>
+          <a href="#loginPage" @click.prevent="handleLogout">登出</a>
+          <!-- <router-link to="/login" class="formControls_btnLink">登出</router-link> -->
         </li>
       </ul>
     </nav>
@@ -25,31 +27,79 @@
 </template>
 
 <script setup>
+import { logout, getUserData, getTodoData, postTodoData, deleteTodoData } from '@/utils/api'
 import TodoForm from '@/components/TodoForm.vue'
 import TodoList from '@/components/TodoList.vue'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
+const router = useRouter()
+const getUserNickname = ref('')
 
-const todos = ref([
-  { id: 1, content: '把冰箱發霉的檸檬拿去丟', status: false },
-  { id: 2, content: '打電話叫媽媽匯款給我', status: true },
-])
+const todos = ref([])
 
-const addTodo = (content) => {
-  if (content.trim() !== '') {
-    todos.value.push({
-      id: Date.now(), // 等同於 new Date().getTime()
-      content, // 等同於 content: content
-      status: false,
-    })
+const addTodo = async (content) => {
+  try {
+    if (content.trim() !== '') {
+      const newTodo = {
+        id: Date.now(),
+        content,
+        status: false,
+      }
+
+      todos.value.push(newTodo)
+    }
+    const res = await postTodoData(content)
+    console.log(res)
+  } catch (error) {
+    console.log(error)
   }
 }
-
-const removeTodo = (id) => {
-  todos.value = todos.value.filter((t) => t.id !== id)
+const removeTodo = async (id) => {
+  try {
+    const res = await deleteTodoData(id)
+    if (todos.value.length !== 0) {
+      todos.value = todos.value.filter((t) => t.id !== id)
+    }
+    console.log(res)
+  } catch (error) {
+    console.log(error)
+  }
   // todos.value = todos.value.filter((t) => {
   //   return t.id !== id  // 有沒有加 return 很有差!!
   // })
 }
+
+const handleLogout = async () => {
+  try {
+    await logout()
+    // 清除 cookie
+    document.cookie = 'vue3-todolist-token=;'
+    alert('您已登出。')
+    router.push('/login')
+  } catch (error) {
+    // console.log(error)
+  }
+}
+
+// 一進來頁面就驗證身份
+const getUser = async () => {
+  try {
+    const res = await getUserData()
+    getUserNickname.value = res.data.nickname
+  } catch (error) {}
+}
+
+const getTodolist = async () => {
+  try {
+    const res = await getTodoData()
+    todos.value = res.data.data
+  } catch (error) {}
+}
+
+onMounted(() => {
+  getUser()
+  getTodolist()
+})
 </script>
 
 <style lang="scss" scoped></style>

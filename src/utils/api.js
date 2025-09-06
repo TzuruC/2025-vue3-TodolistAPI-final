@@ -33,3 +33,35 @@ export const login = async (email, password) => {
         password,
     })
 }
+
+// 取 id
+export const getUserData = async () => {
+    return api.get('/users/checkout')
+}
+
+// 登出
+export const logout = async () => {
+    return api.post('/users/sign_out')
+}
+
+// 取得 todo
+export const getTodoData = async () => {
+    return api.get('/todos/')
+}
+
+// 上傳 todo
+export const postTodoData = async (content) => {
+    return api.post('/todos/', {
+        content,
+    })
+}
+
+// 刪除 todo
+export const deleteTodoData = async (id) => {
+    return api.delete(`/todos/${id}`)
+}
+
+// 編輯 todo 狀態
+export const patchTodoData = async (id) => {
+    return api.patch(`/todos/${id}/toggle`, `${id}`)
+}
