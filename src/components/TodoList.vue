@@ -8,7 +8,12 @@
     <div class="todoList_items">
       <ul class="todoList_item">
         <!-- 單一todo元件 TodoItem.vue -->
-        <TodoItem v-for="todo in todos" :key="todo.id" :todo="todo" />
+        <TodoItem
+          v-for="todo in todos"
+          :key="todo.id"
+          :todo="todo"
+          @remove-todo="emit('remove-todo', $event)"
+        />
       </ul>
       <div class="todoList_statistics">
         <p>5 個已完成項目</p>
@@ -26,6 +31,8 @@ const props = defineProps({
     required: true,
   },
 })
+
+const emit = defineEmits(['remove-todo'])
 </script>
 
 <style lang="scss" scoped></style>

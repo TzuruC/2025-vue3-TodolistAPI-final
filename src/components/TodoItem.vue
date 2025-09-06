@@ -5,7 +5,7 @@
       <input class="todoList_input" type="checkbox" value="true" v-model="todo.status" />
       <span>{{ todo.content }}</span>
     </label>
-    <a href="#">
+    <a href="#" @click.prevent="handleRemoveTodo(todo.id)">
       <i class="fa fa-times"></i>
     </a>
   </li>
@@ -18,6 +18,12 @@ const props = defineProps({
     required: true,
   },
 })
+
+const emit = defineEmits(['remove-todo'])
+
+const handleRemoveTodo = (id) => {
+  emit('remove-todo', id)
+}
 </script>
 
 <style lang="scss" scoped></style>

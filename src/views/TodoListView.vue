@@ -15,9 +15,9 @@
     <div class="conatiner todoListPage vhContainer">
       <div class="todoList_Content">
         <!-- 新增待辦表單 TodoForm.vue -->
-        <TodoForm />
+        <TodoForm @add-todo="addTodo" />
         <!-- 檢視代辦項目 TodoList.vue -->
-        <TodoList v-if="todos.length !== 0" :todos="todos" />
+        <TodoList v-if="todos.length !== 0" :todos="todos" @remove-todo="removeTodo" />
         <p v-else>目前尚無待辦事項。</p>
       </div>
     </div>
@@ -33,6 +33,24 @@ const todos = ref([
   { id: 1, content: '把冰箱發霉的檸檬拿去丟', status: false },
   { id: 2, content: '打電話叫媽媽匯款給我', status: true },
 ])
+
+const addTodo = (content) => {
+  if (content.trim() !== '') {
+    todos.value.push({
+      id: Date.now(), // 等同於 new Date().getTime()
+      content, // 等同於 content: content
+      status: false,
+    })
+  }
+}
+
+const removeTodo = (id) => {
+  console.log(id)
+  todos.value = todos.value.filter((t) => t.id !== id)
+  // todos.value = todos.value.filter((t) => {
+  //   return t.id !== id  // 有沒有加 return 很有差!!
+  // })
+}
 </script>
 
 <style lang="scss" scoped></style>
